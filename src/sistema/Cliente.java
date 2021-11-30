@@ -1,5 +1,7 @@
 package sistema;
 
+import java.util.Objects;
+
 public class Cliente {
 	private String Nome;
 	private String endereco;
@@ -7,18 +9,22 @@ public class Cliente {
 	private String email;
 	private String Descricao;
 	private String Observacao;
-	private int CPF;
-	private int IdCliente;
+	private String responsavel;
+	private String emailResponsavel;
+	private long CPF;
 	
-	public Cliente (int id, String nome, int CPF, String endereco, int telefone, String email, String descricao, String observacao) {
-		this.IdCliente = id;
+	public Cliente (String nome, long CPF, String endereco, int telefone, String email, String descricao, String observacao) {
 		this.Nome = nome;
-		this.CPF = CPF;
+		this.CPF = CPF;   
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.email = email;
 		this.Descricao = descricao;
 		this.Observacao = observacao;
+	}
+	
+	public Cliente () {
+		
 	}
 
 	public String getNome() {
@@ -69,19 +75,46 @@ public class Cliente {
 		Observacao = observacao;
 	}
 
-	public int getCPF() {
+	public long getCPF() {
 		return CPF;
 	}
 
-	public void setCPF(int cPF) {
+	public void setCPF(long cPF) {
 		CPF = cPF;
 	}
 
-	public int getIdCliente() {
-		return IdCliente;
+	public String getResponsavel() {
+		return responsavel;
 	}
 
-	public void setIdCliente(int idCliente) {
-		IdCliente = idCliente;
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
 	}
+
+	public String getEmailResponsavel() {
+		return emailResponsavel;
+	}
+
+	public void setEmailResponsavel(String emailResponsavel) {
+		this.emailResponsavel = emailResponsavel;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(CPF);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return CPF == other.CPF;
+	}
+	
+	
 }
