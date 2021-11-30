@@ -2,26 +2,29 @@ package sistema;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class Pedido {
 	private int IdPedido;
 	private Calendar data;
 	private String versao;
-	private String status;
+	private Status status;
 	private double comissao;
 	private double valorTotal;
+	private String descricao;
 	private ArrayList <Produto> Itens = new ArrayList();
 	
 	public Pedido() {
 		
 	}
 	
-	public Pedido(int id, Calendar data, String versao, String Status, double comissao) {
+	public Pedido(int id, Calendar data, String versao, Status Status, double comissao, String descricao) {
 		this.IdPedido = id;
 		this.data = data;
 		this.versao = versao;
 		this.status = Status;
 		this.comissao = comissao;
+		this.descricao = descricao;
 		double valor = 0;
 		for (int i = 0; i < Itens.size(); i++) {
 			valor = valor + Itens.get(i).getPreco();
@@ -76,11 +79,11 @@ public class Pedido {
 		this.versao = versao;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
@@ -107,4 +110,36 @@ public class Pedido {
 	public void setItens(ArrayList<Produto> itens) {
 		Itens = itens;
 	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	@Override
+	public String toString() {
+		return "Pedido [IdPedido=" + IdPedido + ", versao=" + versao + ", descricao=" + descricao + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(IdPedido, versao);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pedido other = (Pedido) obj;
+		return IdPedido == other.IdPedido && Objects.equals(versao, other.versao);
+	}
+	
+	
 }
