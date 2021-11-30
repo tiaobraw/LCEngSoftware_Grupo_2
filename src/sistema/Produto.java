@@ -14,6 +14,11 @@ public class Produto {
 		this.Observacao = observacao;
 		this.preco = preco;
 	}
+	
+	public Produto ()
+	{
+		
+	}
 
 	public int getIdProduto() {
 		return IdProduto;
