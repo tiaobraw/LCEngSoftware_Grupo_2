@@ -2,6 +2,10 @@ package view;
 
 import java.awt.EventQueue;
 import view.CadastroView;
+import sistema.Cliente;
+import sistema.Pedido;
+import sistema.Produto;
+import sistema.Usuario;
 
 public class Inicio {
 
@@ -9,6 +13,10 @@ public class Inicio {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				Boolean existe = true; //Se já há um cadastro, ir direito pra tela de login. CRIAR MÉTODO PARA VERIFICAR ISSO
+				Cliente cliente = new Cliente();
+				Produto produto = new Produto();
+				Pedido pedido = new Pedido();
+				Usuario usuario = new Usuario();
 				try {
 					CadastroView cadastro = new CadastroView();
 					LoginView login = new LoginView();

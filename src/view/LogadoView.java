@@ -9,11 +9,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LogadoView extends JFrame {
 
 	private JPanel contentPane;
-
+	private MeuPerfilView perfil = new MeuPerfilView();
 
 
 	/**
@@ -57,6 +59,14 @@ public class LogadoView extends JFrame {
 		panelBarraLateral.setLayout(null);
 		
 		JPanel panelMeuPerfil = new JPanel();
+		panelMeuPerfil.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//abrir parte do meu perfil
+				perfil.setBounds(267, 117, 917, 444);
+				perfil.setVisible(true);
+			}
+		});
 		panelMeuPerfil.setBounds(0, 25, 268, 59);
 		panelMeuPerfil.setBackground(new Color(0, 0, 0));
 		panelBarraLateral.add(panelMeuPerfil);
