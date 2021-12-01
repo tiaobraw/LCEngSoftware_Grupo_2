@@ -28,6 +28,7 @@ public class LogadoView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		perfil.setVisible(true);
 		
 		JPanel panelBase = new JPanel();
 		panelBase.setBackground(new Color(255, 255, 255));
@@ -58,11 +59,18 @@ public class LogadoView extends JFrame {
 		panelBase.add(panelBarraLateral);
 		panelBarraLateral.setLayout(null);
 		
+		/*JPanel panelBaseLateral = new JPanel();
+		panelBaseLateral.setBounds(267, 117, 917, 444);
+		panelBaseLateral.setBackground(new Color(245, 255, 250));
+		panelBase.add(panelBaseLateral);
+		panelBaseLateral.setLayout(null);
+		*/
 		JPanel panelMeuPerfil = new JPanel();
 		panelMeuPerfil.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//abrir parte do meu perfil
+				panelBase.add(perfil);
 				perfil.setBounds(267, 117, 917, 444);
 				perfil.setVisible(true);
 			}
@@ -75,7 +83,7 @@ public class LogadoView extends JFrame {
 		JLabel lblMeuPerfil = new JLabel("      Meu Perfil");
 		lblMeuPerfil.setFont(new Font("Candara Light", Font.PLAIN, 36));
 		lblMeuPerfil.setForeground(new Color(255, 255, 204));
-		lblMeuPerfil.setBounds(0, 0, 268, 59);
+		lblMeuPerfil.setBounds(21, 11, 220, 37);
 		panelMeuPerfil.add(lblMeuPerfil);
 		
 		JPanel panelProdutos = new JPanel();
@@ -85,6 +93,12 @@ public class LogadoView extends JFrame {
 		panelProdutos.setLayout(null);
 		
 		JLabel lblProdutos = new JLabel("       Produtos");
+		lblProdutos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
+		});
 		lblProdutos.setForeground(new Color(255, 255, 204));
 		lblProdutos.setFont(new Font("Candara Light", Font.PLAIN, 36));
 		lblProdutos.setBounds(0, 0, 268, 59);
@@ -126,11 +140,7 @@ public class LogadoView extends JFrame {
 		lblSair.setBounds(0, 0, 268, 59);
 		panelSair.add(lblSair);
 		
-		JPanel panelBaseLateral = new JPanel();
-		panelBaseLateral.setBounds(267, 117, 917, 444);
-		panelBaseLateral.setBackground(new Color(245, 255, 250));
-		panelBase.add(panelBaseLateral);
-		panelBaseLateral.setLayout(null);
+		
 		
 		JPanel panelBottom = new JPanel();
 		panelBottom.setBackground(new Color(135, 206, 235));

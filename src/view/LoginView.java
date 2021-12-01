@@ -18,13 +18,17 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textCPF;
 	private JPasswordField textSenha;
-
+	private LogadoView logado = new LogadoView();
+	private MeuPerfilView meuPerfil = new MeuPerfilView();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -87,14 +91,16 @@ public class LoginView extends JFrame {
 		panelBase.add(textCPF);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				String CPF = tratarString(textCPF.getText().toString());
 				String senha = textSenha.getPassword().toString();
 				boolean isLogado = true; //aqui no caso seria a chamada do método para fazer o login e que retorna true se o login foi feito e false se não
-				if(isLogado);//chamar tela principal
-			
+				if(isLogado) {
+					setVisible(false);
+					logado.setVisible(true);
+					meuPerfil.setVisible(true);
+				}//chamar tela principal
 			}
 		});
 		btnConfirmar.setFont(new Font("Candara Light", Font.PLAIN, 20));
@@ -116,4 +122,6 @@ public class LoginView extends JFrame {
 		tratar = tratar.replace(")", "");
 		return tratar;
 	}
+	
+	
 }

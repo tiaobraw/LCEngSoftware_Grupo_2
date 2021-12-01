@@ -12,7 +12,7 @@ public class Inicio {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				Boolean existe = true; //Se já há um cadastro, ir direito pra tela de login. CRIAR MÉTODO PARA VERIFICAR ISSO
+				Boolean existe = false; //Se já há um cadastro, ir direito pra tela de login. CRIAR MÉTODO PARA VERIFICAR ISSO
 				Cliente cliente = new Cliente();
 				Produto produto = new Produto();
 				Pedido pedido = new Pedido();
