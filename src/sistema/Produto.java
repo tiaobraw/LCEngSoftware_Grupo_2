@@ -6,13 +6,15 @@ public class Produto {
 	private String Descricao;
 	private String Observacao;
 	private double preco;
+	private String nome;
 	
-	public Produto (int id, String tag, String descricao, String observacao, double preco) {
+	public Produto (int id, String tag, String descricao, String observacao, double preco, String nome) {
 		this.IdProduto = id;
 		this.Tag = tag;
 		this.Descricao = descricao;
 		this.Observacao = observacao;
 		this.preco = preco;
+		this.nome = nome;
 	}
 	
 	public Produto ()
@@ -59,4 +61,13 @@ public class Produto {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 }
