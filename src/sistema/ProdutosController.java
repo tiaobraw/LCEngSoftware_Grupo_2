@@ -6,17 +6,17 @@ import dados.RepositorioGenerico;
 import exceptions.ElementoJaExisteException;
 import exceptions.ElementoNaoExisteException;
 
-public class PedidosController {
+public class ProdutosController {
 
-	private RepositorioGenerico<Pedido> repositorioPedidos;
-	
-	public PedidosController() {
-		this.repositorioPedidos = new RepositorioGenerico<Pedido>();
+	private RepositorioGenerico<Produto> repositorioProdutos;
+
+	public ProdutosController() {
+		this.repositorioProdutos = new RepositorioGenerico<Produto>();
 	}
-	
-	public boolean inserirPedido(Pedido newObj) {
+
+	public boolean inserirProduto(Produto newObj) {
 		try {
-			this.repositorioPedidos.inserir(newObj);
+			this.repositorioProdutos.inserir(newObj);
 			boolean ok = true; //aqui vai chamar o repositorio e fazer o update
 			return ok;
 		} catch (ElementoJaExisteException e) {
@@ -24,14 +24,14 @@ public class PedidosController {
 			return false;
 		}
 	}
-	
-	public List<Pedido> listarPedidos(){
-		return repositorioPedidos.listar();
+
+	public List<Produto> listarProduto() {
+		return repositorioProdutos.listar();
 	}
-	
-	public boolean removerPedido(Pedido newObj) {
+
+	public boolean removerProduto(Produto newObj) {
 		try {
-			this.repositorioPedidos.remover(newObj);
+			this.repositorioProdutos.remover(newObj);
 			boolean ok = true; //aqui vai chamar o repositorio e fazer o update
 			return ok;
 		} catch (ElementoNaoExisteException e) {
@@ -39,10 +39,10 @@ public class PedidosController {
 			return false;
 		}
 	}
-	
-	public boolean atualizarPedido(Pedido newObj) {
+
+	public boolean atualizarProduto(Produto newObj) {
 		try {
-			this.repositorioPedidos.atualizar(newObj);
+			this.repositorioProdutos.atualizar(newObj);
 			boolean ok = true; //aqui vai chamar o repositorio e fazer o update
 			return ok;
 		} catch (ElementoNaoExisteException e) {
@@ -50,4 +50,5 @@ public class PedidosController {
 			return false;
 		}
 	}
+
 }
