@@ -7,8 +7,7 @@ public class ElementoNaoExisteException extends Exception{
 	private Object elemento;
     
     public ElementoNaoExisteException(Object obj) {
-        super("Objeto j· est· cadastrado no repositÛrio e n„o pode ser "
-                + "adicionado novamente");
+        super( obj.toString() +"j√° est√° cadastrado no reposit√≥rio e n√£o pode ser adicionado novamente");
         this.elemento = obj;        
     }
     
