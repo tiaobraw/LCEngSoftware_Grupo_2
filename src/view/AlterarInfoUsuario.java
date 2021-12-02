@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import exceptions.SenhaIncorretaException;
+import sistema.Fachada;
 
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -30,13 +31,15 @@ public class AlterarInfoUsuario extends JDialog {
 	private JTextField textEmail;
 	private JFormattedTextField textNumero;
 	private JPasswordField textSenha;
-	private ConfirmarSenhaView confirmarSenha = new ConfirmarSenhaView();
+	private Fachada fachada = new Fachada();
+	private ConfirmarSenhaView confirmarSenha = new ConfirmarSenhaView(fachada);
 
 
 	/**
 	 * Create the dialog.
 	 */
-	public AlterarInfoUsuario() {
+	public AlterarInfoUsuario(Fachada fachada) {
+		this.fachada = fachada;
 		setBackground(new Color(0, 0, 0));
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

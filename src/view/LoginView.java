@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import sistema.Fachada;
+
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,8 +28,9 @@ public class LoginView extends JFrame {
 	private JPanel contentPane;
 	private JTextField textCPF;
 	private JPasswordField textSenha;
-	private LogadoView logado = new LogadoView();
-	private MeuPerfilView meuPerfil = new MeuPerfilView();
+	Fachada fachada = new Fachada();
+	private LogadoView logado = new LogadoView(fachada);
+	private MeuPerfilView meuPerfil = new MeuPerfilView(fachada);
 	
 	/**
 	 * Launch the application.
@@ -36,7 +39,8 @@ public class LoginView extends JFrame {
 	 * Create the frame.
 	 * @throws ParseException 
 	 */
-	public LoginView() throws ParseException {
+	public LoginView(Fachada fachada) throws ParseException {
+		this.fachada = fachada;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
 		contentPane = new JPanel();

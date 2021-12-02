@@ -14,7 +14,7 @@ public class UsuarioController {
 		repositorioUsuario = new RepositorioGenerico<Usuario>();
 	}
 	
-	public boolean CadastrarUsuario(String nome, String senha, String email, long numero, long CPF) throws StringVaziaException {
+/*	public boolean CadastrarUsuario(String nome, String senha, String email, long numero, long CPF) throws StringVaziaException {
 		if(nome.length() != 0 && senha.length() != 0 && email.length() != 0 && numero > 0 && CPF > 0) {
 			Usuario usuario = new Usuario(nome, senha, email, numero, CPF);
 			return repositorioUsuario.inserir(usuario);; 
@@ -25,7 +25,7 @@ public class UsuarioController {
 		else if(CPF <= 0) throw new StringVaziaException("o CPF");
 		return false;
 	}
-	
+	*/
 	public boolean AlterarSenha(String senhaInformada, String NovaSenha) throws StringVaziaException, SenhaPequenaException, SenhaIncorretaException {
 		String senhaAtual = "";//repositorio tem que ter metodo que retorna a senha atual
 		if(senhaInformada.length() != 0 && NovaSenha.length() >= 8 && senhaInformada == senhaAtual) {

@@ -6,6 +6,7 @@ import java.util.List;
 
 import exceptions.ElementoJaExisteException;
 import exceptions.ElementoNaoExisteException;
+import sistema.Pedido;
 
 public class RepositorioGenerico<T> {
 
@@ -15,9 +16,10 @@ public class RepositorioGenerico<T> {
 		this.elementos = new ArrayList<>();
 	}
 
-	public void inserir(T novoObj) throws ElementoJaExisteException {
+	public boolean inserir(T novoObj) throws ElementoJaExisteException {
 		if (!this.elementos.contains(novoObj)) {
 			this.elementos.add(novoObj);
+			return true;
 		} else {
 			throw new ElementoJaExisteException(novoObj);
 		}
@@ -42,5 +44,10 @@ public class RepositorioGenerico<T> {
 		} else {
 			throw new ElementoNaoExisteException(newObj);
 		}
+	}
+	
+	public boolean contem(Pedido pedido) { //retorna true
+		if(this.elementos.contains(pedido)) return true;
+		return false;
 	}
 }

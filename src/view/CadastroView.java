@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import sistema.Fachada;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -31,6 +33,8 @@ public class CadastroView extends JFrame {
 	private JFormattedTextField textCPF;
 	private JFormattedTextField textEmail;
 	private JFormattedTextField textNumero;
+	Fachada fachada = new Fachada();
+
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +42,8 @@ public class CadastroView extends JFrame {
 	 * Create the frame.
 	 * @throws ParseException 
 	 */
-	public CadastroView() throws ParseException {
+	public CadastroView(Fachada fachada) throws ParseException {
+		this.fachada = fachada;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
 		contentPane = new JPanel();
@@ -138,12 +143,13 @@ public class CadastroView extends JFrame {
 				String nome = textNome.getText().toString();
 				String Email = textEmail.getText().toString();
 				String senha = textSenha.getPassword().toString();
+				fachada.getInstance().inserirPedido();
 				Boolean cadastrado = true; //chamar método para adicionar que vai retornar true se tiver adicionado e falso se não
 				if(cadastrado) {
 					//chamar tela de login
 					setVisible(false);
 					try {
-						LoginView login = new LoginView();
+						LoginView login = new LoginView(fachada);
 						login.setVisible(true);
 					} catch (ParseException e1) {
 						// TODO Auto-generated catch block

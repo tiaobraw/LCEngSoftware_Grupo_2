@@ -3,6 +3,7 @@ package view;
 import java.awt.EventQueue;
 import view.CadastroView;
 import sistema.Cliente;
+import sistema.Fachada;
 import sistema.Pedido;
 import sistema.Produto;
 import sistema.Usuario;
@@ -17,9 +18,10 @@ public class Inicio {
 				Produto produto = new Produto();
 				Pedido pedido = new Pedido();
 				Usuario usuario = new Usuario();
+				Fachada fachada = new Fachada();
 				try {
-					CadastroView cadastro = new CadastroView();
-					LoginView login = new LoginView();
+					CadastroView cadastro = new CadastroView(fachada);
+					LoginView login = new LoginView(fachada);
 					if(existe) {
 						cadastro.setVisible(true);	
 						login.setVisible(false);	

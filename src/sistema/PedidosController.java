@@ -1,5 +1,6 @@
 package sistema;
 
+import java.util.Calendar;
 import java.util.List;
 
 import dados.RepositorioGenerico;
@@ -14,13 +15,9 @@ public class PedidosController {
 		this.repositorioPedidos = new RepositorioGenerico<Pedido>();
 	}
 	
-	public void inserirPedido(Pedido newObj) {
-		try {
-			this.repositorioPedidos.inserir(newObj);
-		} catch (ElementoJaExisteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void inserir()
+	{
+		
 	}
 	
 	public List<Pedido> listarPedidos(){

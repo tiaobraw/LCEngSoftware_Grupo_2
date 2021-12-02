@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.JPanel;
+
+import sistema.Fachada;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -9,12 +12,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class MeuPerfilView extends JPanel {
-
-	private AlterarInfoUsuario alterarInfo = new AlterarInfoUsuario();
+	private Fachada fachada = new Fachada();
+	private AlterarInfoUsuario alterarInfo = new AlterarInfoUsuario(fachada);
 	/**
 	 * Create the panel.
 	 */
-	public MeuPerfilView() {
+	public MeuPerfilView(Fachada fachada) {
+		this.fachada = fachada;
 		setBackground(new Color(255, 255, 255));
 		setBounds(100,100,452,444);
 		setLayout(null);

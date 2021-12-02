@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import sistema.Fachada;
+
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,13 +18,15 @@ import java.awt.event.MouseEvent;
 public class LogadoView extends JFrame {
 
 	private JPanel contentPane;
-	private MeuPerfilView perfil = new MeuPerfilView();
+	private Fachada fachada = new Fachada();
+	private MeuPerfilView perfil = new MeuPerfilView(fachada);
 
 
 	/**
 	 * Create the frame.
 	 */
-	public LogadoView() {
+	public LogadoView(Fachada fachada) {
+		this.fachada = fachada;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 600);
 		contentPane = new JPanel();

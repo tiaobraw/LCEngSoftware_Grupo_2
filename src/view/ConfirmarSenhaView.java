@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import exceptions.SenhaIncorretaException;
+import sistema.Fachada;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -30,7 +31,7 @@ public class ConfirmarSenhaView extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ConfirmarSenhaView() {
+	public ConfirmarSenhaView(Fachada fachada) {
 		setBounds(100, 100, 383, 130);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 255, 255));

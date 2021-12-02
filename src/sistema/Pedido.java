@@ -12,13 +12,14 @@ public class Pedido {
 	private double comissao;
 	private double valorTotal;
 	private String descricao;
-	private ArrayList <Produto> Itens = new ArrayList();
+	private Cliente cliente;
+	private ArrayList <Produto> Itens = new ArrayList<Produto>();
 	
 	public Pedido() {
 		
 	}
 	
-	public Pedido(int id, Calendar data, String versao, Status Status, double comissao, String descricao) {
+	public Pedido(int id, Calendar data, String versao, Status Status, double comissao, String descricao, Cliente cliente) {
 		this.IdPedido = id;
 		this.data = data;
 		this.versao = versao;
@@ -118,6 +119,16 @@ public class Pedido {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	@Override
 	public String toString() {
@@ -126,7 +137,7 @@ public class Pedido {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(IdPedido, versao);
+		return Objects.hash(IdPedido, cliente, versao);
 	}
 
 	@Override
@@ -138,8 +149,12 @@ public class Pedido {
 		if (getClass() != obj.getClass())
 			return false;
 		Pedido other = (Pedido) obj;
-		return IdPedido == other.IdPedido && Objects.equals(versao, other.versao);
+		return IdPedido == other.IdPedido && Objects.equals(cliente, other.cliente)
+				&& Objects.equals(versao, other.versao);
 	}
+	
+	
+	
 	
 	
 }
