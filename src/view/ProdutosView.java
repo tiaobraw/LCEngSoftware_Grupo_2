@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import sistema.Fachada;
+
 import java.awt.Color;
 import javax.swing.JTable;
 
@@ -34,7 +37,7 @@ public class ProdutosView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ProdutosView() {
+	public ProdutosView(Fachada fachada) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(267, 117, 917, 444);
 		contentPane = new JPanel();
