@@ -14,47 +14,35 @@ public class PedidosController {
 	public PedidosController() {
 		this.repositorioPedidos = new RepositorioGenerico<Pedido>();
 	}
-	
-<<<<<<< HEAD
-	public void inserir()
-	{
 		
-=======
-	public boolean inserirPedido(Pedido newObj) {
-		try {
-			this.repositorioPedidos.inserir(newObj);
-			boolean ok = true; //aqui vai chamar o repositorio e fazer o update
-			return ok;
-		} catch (ElementoJaExisteException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
->>>>>>> 0281e8511afa5ec8a497ea079c679033ad0a21e4
+	public boolean inserir(int id, Calendar data, String versao, Status Status, double comissao, String descricao, Cliente cliente) throws ElementoJaExisteException {
+		Pedido pedido = new Pedido(id, data, versao, Status, comissao, descricao, cliente);
+		Pedido temporario = pedido;
+		temporario = this.repositorioPedidos.getObj(temporario);
+		if(temporario == null) return this.repositorioPedidos.inserir(pedido);
+		else throw new ElementoJaExisteException(pedido);
+		
+			
 	}
 	
-	public List<Pedido> listarPedidos(){
+	public List<Pedido> listar(){
 		return repositorioPedidos.listar();
 	}
 	
-	public boolean removerPedido(Pedido newObj) {
-		try {
-			this.repositorioPedidos.remover(newObj);
-			boolean ok = true; //aqui vai chamar o repositorio e fazer o update
-			return ok;
-		} catch (ElementoNaoExisteException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
+	public boolean remover(Pedido pedido) throws ElementoJaExisteException, ElementoNaoExisteException {
+		Pedido temporario = pedido;
+		temporario = this.repositorioPedidos.getObj(temporario);
+		if(temporario != null) return this.repositorioPedidos.inserir(pedido);
+		else throw new ElementoNaoExisteException(pedido);
 	}
 	
-	public boolean atualizarPedido(Pedido newObj) {
-		try {
-			this.repositorioPedidos.atualizar(newObj);
-			boolean ok = true; //aqui vai chamar o repositorio e fazer o update
-			return ok;
-		} catch (ElementoNaoExisteException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
+	public boolean atualizar(Pedido newPedido, Pedido oldPedido) throws ElementoNaoExisteException {
+		oldPedido = this.repositorioPedidos.getObj(oldPedido);
+		if(oldPedido != null) return this.repositorioPedidos.atualizar(newPedido);
+		else throw new ElementoNaoExisteException(oldPedido);
+	}
+	
+	public Pedido getPedido(Pedido pedido) {
+		return this.repositorioPedidos.getObj(pedido);
 	}
 }

@@ -7,14 +7,18 @@ public class Produto {
 	private String Observacao;
 	private double preco;
 	private String nome;
+	private boolean insidePedido;
+	private Pedido pedido;
 	
-	public Produto (int id, String tag, String descricao, String observacao, double preco, String nome) {
+	public Produto (int id, String tag, String descricao, String observacao, double preco, String nome, boolean insidePedido, Pedido pedido) {
 		this.IdProduto = id;
 		this.Tag = tag;
 		this.Descricao = descricao;
 		this.Observacao = observacao;
 		this.preco = preco;
 		this.nome = nome;
+		this.insidePedido = insidePedido;
+		this.pedido = pedido;
 	}
 	
 	public Produto ()
@@ -68,6 +72,31 @@ public class Produto {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public boolean isInsidePedido() {
+		return insidePedido;
+	}
+
+	public void setInsidePedido(boolean insidePedido) {
+		this.insidePedido = insidePedido;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+	public boolean equals(Produto produto) {
+		if(insidePedido && produto.insidePedido) {
+			if(this.IdProduto == produto.IdProduto && this.pedido.equals(produto.pedido)) return true;
+		}else if(!insidePedido && !produto.insidePedido) {
+			if(this.IdProduto == produto.IdProduto) return true;
+		}else return false;
+		return false;
 	}
 	
 }

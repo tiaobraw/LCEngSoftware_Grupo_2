@@ -143,7 +143,7 @@ public class CadastroView extends JFrame {
 				String nome = textNome.getText().toString();
 				String Email = textEmail.getText().toString();
 				String senha = textSenha.getPassword().toString();
-				fachada.getInstance().inserirPedido();
+				
 				Boolean cadastrado = true; //chamar método para adicionar que vai retornar true se tiver adicionado e falso se não
 				if(cadastrado) {
 					//chamar tela de login

@@ -16,7 +16,5 @@ public class Fachada {
 		return instancia;
 	}
 	
-	public void inserirPedido() {
-		pedidos.inserir();
-	}
+	
 }
