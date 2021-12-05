@@ -1,5 +1,7 @@
 package sistema;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import dados.RepositorioGenerico;
@@ -50,4 +52,25 @@ public class PedidosController {
 			return false;
 		}
 	}
+	
+	public List<Pedido> listarOfertasNaData(Calendar dataAtual) {
+		List<Pedido> listaPedidos = new ArrayList<>();
+		for (Pedido p: this.repositorioPedidos.listar()) {
+			if (p.getData().equals(dataAtual)) {
+				listaPedidos.add(p);
+			}
+		}
+		return listaPedidos;
+	}
+	
+	public void gerarRelatorio() {
+		// TODO Implementar método.
+	}
+	
+	public void informarGanhoDoMes() {
+		// TODO Implementar método.
+		// Apenas orçamentos com status "fechado" devem constar nos cálculos
+	}
+	
+	// TODO dar nome e implementar método de geração de PDFs
 }
