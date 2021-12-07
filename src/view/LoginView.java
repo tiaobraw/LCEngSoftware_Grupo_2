@@ -9,11 +9,14 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import exceptions.ElementoNaoExisteException;
+import exceptions.SenhaIncorretaException;
 import sistema.Fachada;
 
 import java.awt.Color;
@@ -97,14 +100,23 @@ public class LoginView extends JFrame {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String CPF = tratarString(textCPF.getText().toString());
+				long CPF = Long.parseLong(tratarString(textCPF.getText().toString()));
 				String senha = textSenha.getPassword().toString();
-				boolean isLogado = true; //aqui no caso seria a chamada do método para fazer o login e que retorna true se o login foi feito e false se não
-				if(isLogado) {
-					setVisible(false);
-					logado.setVisible(true);
-					meuPerfil.setVisible(true);
-				}//chamar tela principal
+				boolean isLogado;
+				try {
+					isLogado = fachada.login(CPF, senha);
+					if(isLogado) {
+						setVisible(false); //tela de login some
+						logado.setVisible(true); //tela de logado aparece
+						meuPerfil.setVisible(true); //e parte do meu perfil
+						textCPF.setText(""); //reseta as infos
+						textSenha.setText("");
+					}
+				} catch (ElementoNaoExisteException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				} catch (SenhaIncorretaException e2) {
+					JOptionPane.showMessageDialog(null, e2.getMessage());
+				} 
 			}
 		});
 		btnConfirmar.setFont(new Font("Candara Light", Font.PLAIN, 20));

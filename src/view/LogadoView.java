@@ -47,7 +47,7 @@ public class LogadoView extends JFrame {
 		panelBase.add(panelInicio);
 		panelInicio.setLayout(null);
 		
-		JLabel lblInicio = new JLabel("Bem-vindo, <seu nome>. \r\n");
+		JLabel lblInicio = new JLabel("Bem-vindo(a), " + fachada.getUsuario().getNome());
 		lblInicio.setBounds(10, 32, 573, 38);
 		panelInicio.add(lblInicio);
 		lblInicio.setFont(new Font("Candara Light", Font.BOLD, 40));
@@ -98,12 +98,7 @@ public class LogadoView extends JFrame {
 		panelProdutos.setLayout(null);
 		
 		JLabel lblProdutos = new JLabel("       Produtos");
-		lblProdutos.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				
-			}
-		});
+		
 		lblProdutos.setForeground(new Color(255, 255, 204));
 		lblProdutos.setFont(new Font("Candara Light", Font.PLAIN, 36));
 		lblProdutos.setBounds(0, 0, 268, 59);

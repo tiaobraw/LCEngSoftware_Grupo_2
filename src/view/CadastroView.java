@@ -8,11 +8,14 @@ import java.text.ParseException;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import exceptions.ElementoJaExisteException;
+import exceptions.StringVaziaException;
 import sistema.Fachada;
 
 import java.awt.Color;
@@ -138,26 +141,36 @@ public class CadastroView extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//Tratar Strings de CPF e número
-				String CPF = tratarString(textCPF.getText().toString());
-				String numero = tratarString(textNumero.getText().toString());
+				long CPF = Long.parseLong(tratarString(textCPF.getText().toString()));
+				long numero = Long.parseLong(tratarString(textNumero.getText().toString()));
 				String nome = textNome.getText().toString();
 				String Email = textEmail.getText().toString();
 				String senha = textSenha.getPassword().toString();
 				
-				Boolean cadastrado = true; //chamar método para adicionar que vai retornar true se tiver adicionado e falso se não
-				if(cadastrado) {
-					//chamar tela de login
-					setVisible(false);
-					try {
+				Boolean cadastrado;
+				try {
+					cadastrado = fachada.cadastrarUsuario(nome, senha, Email, CPF, numero);
+					if(cadastrado) {
+						setVisible(false);
 						LoginView login = new LoginView(fachada);
 						login.setVisible(true);
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						textNome.setText("");
+						textEmail.setText("");
+						textSenha.setText("");
+						textCPF.setText("");
+						textNumero.setText("");
 					}
+				} catch (StringVaziaException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage());
+				} catch (ElementoJaExisteException e2) {
+					JOptionPane.showMessageDialog(null, e2.getMessage());
+				}catch (ParseException e3) {
+					JOptionPane.showMessageDialog(null, e3.getMessage());
+				}
+	
 					
 				}
-			}
+			
 		});
 		btnConfirmar.setFont(new Font("Candara Light", Font.PLAIN, 20));
 		btnConfirmar.setBackground(new Color(204, 255, 204));

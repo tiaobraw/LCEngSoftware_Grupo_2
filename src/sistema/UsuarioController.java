@@ -2,6 +2,7 @@ package sistema;
 
 import exceptions.SenhaIncorretaException;
 import exceptions.SenhaPequenaException;
+import exceptions.SenhasNaoConferemException;
 import dados.RepositorioGenerico;
 import exceptions.ElementoJaExisteException;
 import exceptions.ElementoNaoExisteException;
@@ -27,34 +28,49 @@ public class UsuarioController {
 		return false;
 	}
 	
-	public boolean AlterarSenha(String senhaInformada, String NovaSenha, long CPF) throws StringVaziaException, SenhaPequenaException, SenhaIncorretaException, ElementoNaoExisteException {
-		Usuario usuario = new Usuario();
-		usuario.setCPF(CPF);
-		usuario = this.repositorioUsuario.getObj(usuario);
-		if(senhaInformada.length()!= 0 && NovaSenha.length() >= 8 && senhaInformada == usuario.getSenha()) {
-			usuario.setSenha(NovaSenha);
-			return this.repositorioUsuario.atualizar(usuario);
-		}else if(senhaInformada.length() <= 0) throw new StringVaziaException("a senha");
-		else if(NovaSenha.length() < 8) throw new SenhaPequenaException();
-		else if(senhaInformada != usuario.getSenha()) throw new SenhaIncorretaException();
-		return false;
-	}
 	
-	public boolean Alterar(String nome, String email, long CPF, long numero) throws StringVaziaException, ElementoNaoExisteException {
+	public boolean Alterar(String nome, String email, long CPF, long numero, String senhaNova, String confirmaSenhaNova, String senhaInformada) throws StringVaziaException, ElementoNaoExisteException, SenhasNaoConferemException, SenhaIncorretaException, SenhaPequenaException {
 		Usuario usuario = new Usuario();
-		usuario.setCPF(CPF);
-		usuario = this.repositorioUsuario.getObj(usuario);
-		if(usuario != null && nome.length() != 0 && email.length() != 0 && CPF != 0 && numero != 0) {
+		if(nome.length() == 0) nome = this.getUsuario().getNome();
+		if(email.length() == 0) email = this.getUsuario().getEmail();
+		if(numero == 0) numero = this.getUsuario().getNumero();
+		if(CPF == 0) CPF  = this.getUsuario().getCPF();
+		if(senhaNova.length() == 0 && confirmaSenhaNova.length() == 0) senhaNova = confirmaSenhaNova = this.getUsuario().getSenha();
+		
+		if(this.getUsuario() != null && 
+				nome.length() != 0 && 
+				email.length() != 0 && 
+				CPF != 0 && numero != 0 && 
+				senhaNova.length() >= 8 &&
+				confirmaSenhaNova.length() >= 8 &&
+				senhaInformada.length() != 0 &&
+				senhaNova.equals(confirmaSenhaNova) &&
+				senhaInformada.equals(this.getUsuario().getSenha())) {
+			
 			usuario.setNome(nome);
 			usuario.setEmail(email);
 			usuario.setCPF(CPF);
 			usuario.setNumero(numero);
+			usuario.setSenha(senhaNova);
 			return this.repositorioUsuario.atualizar(usuario);
-		}else if(nome.length() <= 0) throw new StringVaziaException("o nome");
+		}
+		else if(nome.length() <= 0) throw new StringVaziaException("o nome");
+		
 		else if(email.length() <= 0) throw new StringVaziaException("o email");
+		
 		else if(numero <= 0) throw new StringVaziaException("o nï¿½mero");
+		
 		else if(CPF <= 0) throw new StringVaziaException("o CPF");
-		else if(usuario == null) throw new ElementoNaoExisteException(usuario);
+		
+		else if(this.getUsuario() == null) throw new ElementoNaoExisteException(usuario);
+		
+		else if(!senhaNova.equals(confirmaSenhaNova)) throw new SenhasNaoConferemException();
+		
+		else if(!senhaInformada.equals(this.getUsuario().getSenha())) throw new SenhaIncorretaException();
+		
+		else if(senhaNova.length() < 8) throw new SenhaPequenaException();
+		
+		
 	
 	return false;
 }
@@ -71,9 +87,8 @@ public class UsuarioController {
 		return false;
 	}
 	
-	public Usuario getUsuario(long CPF) {
-		Usuario usuario = new Usuario();
-		usuario.setCPF(CPF);
+	public Usuario getUsuario() {
+		Usuario usuario = new Usuario(); //como só há um usuario, nao precisa passar parametro, ja pega direto do banco de dados
 		return this.repositorioUsuario.getObj(usuario);
 	}
 	

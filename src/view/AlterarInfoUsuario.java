@@ -8,7 +8,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import exceptions.ElementoNaoExisteException;
 import exceptions.SenhaIncorretaException;
+import exceptions.SenhaPequenaException;
+import exceptions.SenhasNaoConferemException;
+import exceptions.StringVaziaException;
 import sistema.Fachada;
 
 import java.awt.Color;
@@ -32,13 +36,14 @@ public class AlterarInfoUsuario extends JDialog {
 	private JFormattedTextField textNumero;
 	private JPasswordField textSenha;
 	private Fachada fachada = new Fachada();
-	private ConfirmarSenhaView confirmarSenha = new ConfirmarSenhaView(fachada);
+	private JPasswordField textConfirmarSenha;
+	private JPasswordField textInformeSenha;
 
 
 	/**
 	 * Create the dialog.
 	 */
-	public AlterarInfoUsuario(Fachada fachada) {
+	public AlterarInfoUsuario(Fachada fachada, MeuPerfilView meuPerfil) {
 		this.fachada = fachada;
 		setBackground(new Color(0, 0, 0));
 		setBounds(100, 100, 450, 300);
@@ -53,23 +58,27 @@ public class AlterarInfoUsuario extends JDialog {
 		textNome.setBounds(25, 31, 147, 20);
 		contentPanel.add(textNome);
 		textNome.setColumns(10);
+		textNome.setText(fachada.getUsuario().getNome());
 		{
 			textCPF = new JFormattedTextField();
 			textCPF.setColumns(10);
 			textCPF.setBounds(25, 87, 147, 20);
 			contentPanel.add(textCPF);
+			textCPF.setText(String.valueOf(fachada.getUsuario().getCPF()));
 		}
 		{
 			textEmail = new JTextField();
 			textEmail.setColumns(10);
 			textEmail.setBounds(25, 151, 147, 20);
 			contentPanel.add(textEmail);
+			textEmail.setText(fachada.getUsuario().getEmail());
 		}
 		{
 			textNumero = new JFormattedTextField();
 			textNumero.setColumns(10);
 			textNumero.setBounds(239, 31, 147, 20);
 			contentPanel.add(textNumero);
+			textNumero.setText(String.valueOf(fachada.getUsuario().getNumero()));
 		}
 		{
 			textSenha = new JPasswordField();
@@ -102,6 +111,26 @@ public class AlterarInfoUsuario extends JDialog {
 		lblNumero.setFont(new Font("Candara Light", Font.PLAIN, 15));
 		lblNumero.setBounds(239, 21, 108, 14);
 		contentPanel.add(lblNumero);
+		
+		JLabel lblConfirmarSenha = new JLabel("Confirmar senha");
+		lblConfirmarSenha.setFont(new Font("Candara Light", Font.PLAIN, 15));
+		lblConfirmarSenha.setBounds(239, 134, 169, 22);
+		contentPanel.add(lblConfirmarSenha);
+		
+		textConfirmarSenha = new JPasswordField();
+		textConfirmarSenha.setColumns(10);
+		textConfirmarSenha.setBounds(239, 151, 147, 20);
+		contentPanel.add(textConfirmarSenha);
+		
+		JLabel lblInformeSuaSenha = new JLabel("Informe sua senha");
+		lblInformeSuaSenha.setFont(new Font("Candara Light", Font.PLAIN, 15));
+		lblInformeSuaSenha.setBounds(25, 195, 169, 22);
+		contentPanel.add(lblInformeSuaSenha);
+		
+		textInformeSenha = new JPasswordField();
+		textInformeSenha.setColumns(10);
+		textInformeSenha.setBounds(159, 194, 228, 20);
+		contentPanel.add(textInformeSenha);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(new Color (135, 206, 235));
@@ -116,34 +145,36 @@ public class AlterarInfoUsuario extends JDialog {
 						long numero = Long.parseLong(tratarString(textNumero.getText().toString()));
 						long CPF = Long.parseLong(textCPF.getText().toString());
 						String senha = textSenha.getPassword().toString();
-						if(email.length() != 0 || senha.length() != 0) {
-							confirmarSenha.setVisible(true);
-							confirmarSenha.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-							confirmarSenha.setBounds(200, 200, 150, 200);
-							confirmarSenha.getOkButton().addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent e) {
-									String senha = confirmarSenha.getTextSenha().getPassword().toString();
-									try {
-									if(senha == "") { //comparar senha digitada com a real
-										
-										textSenha.setText("");
-										confirmarSenha.setVisible(false);
-										setVisible(false);
-										JOptionPane.showMessageDialog(null, "Informações modificadas com sucesso");
-									}else {
-										throw new SenhaIncorretaException();
-									}
-									}catch(SenhaIncorretaException e1)
-									{
-										JOptionPane.showMessageDialog(null, e1.getMessage());
-									}
-								}
-							});
-						}else {
-							//só mudar as coisas automaticas
-							JOptionPane.showMessageDialog(null, "Informações modificadas com sucesso!");
-							setVisible(false);
+						String confirmarSenha = textConfirmarSenha.getPassword().toString();
+						String senhaInformada = textInformeSenha.getPassword().toString();
+						
+						try {
+							boolean alterado = fachada.atualizarUsuario(nome, email, CPF, numero, senha, confirmarSenha, senhaInformada);
+							if(alterado) {
+								textNome.setText("");
+								textEmail.setText("");
+								textSenha.setText("");
+								textCPF.setText("");
+								textNumero.setText("");
+								textConfirmarSenha.setText("");
+								textInformeSenha.setText("");
+								
+								meuPerfil.getLblNome().setText("Nome: " + fachada.getUsuario().getNome());
+								meuPerfil.getLblCPF().setText("CPF: " + fachada.getUsuario().getCPF());
+								meuPerfil.getLblEmail().setText("Email: " +fachada.getUsuario().getEmail());
+								meuPerfil.getLblNumero().setText("Número: " + fachada.getUsuario().getNumero());
+								
+								JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso!");
+								setVisible(false);
+							}
+						} catch (StringVaziaException | ElementoNaoExisteException | SenhasNaoConferemException
+								| SenhaIncorretaException | SenhaPequenaException e1) {
+							JOptionPane.showMessageDialog(null, e1);
 						}
+						
+						
+							
+						
 						
 						
 					}

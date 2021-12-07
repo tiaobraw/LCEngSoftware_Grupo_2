@@ -11,37 +11,39 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class MeuPerfilView extends JPanel {
-	private Fachada fachada = new Fachada();
-	private AlterarInfoUsuario alterarInfo = new AlterarInfoUsuario(fachada);
+public class MeuPerfilView extends JPanel { 
+	private JLabel lblCPF;
+	private JLabel lblNome;
+	private JLabel lblNumero;
+	private JLabel lblEmail;
 	/**
 	 * Create the panel.
 	 */
 	public MeuPerfilView(Fachada fachada) {
-		this.fachada = fachada;
+		AlterarInfoUsuario alterarInfo = new AlterarInfoUsuario(fachada, this);
 		setBackground(new Color(255, 255, 255));
 		setBounds(100,100,452,444);
 		setLayout(null);
 		
-		JLabel lblNome = new JLabel("Nome: ");
+		lblNome = new JLabel("Nome: " + fachada.getUsuario().getNome());
 		lblNome.setForeground(new Color(0, 0, 0));
 		lblNome.setFont(new Font("Candara Light", Font.PLAIN, 20));
 		lblNome.setBounds(10, 11, 268, 59);
 		add(lblNome);
 		
-		JLabel lblCPF = new JLabel("CPF:");
+		lblCPF = new JLabel("CPF: " + fachada.getUsuario().getCPF());
 		lblCPF.setForeground(Color.BLACK);
 		lblCPF.setFont(new Font("Candara Light", Font.PLAIN, 20));
 		lblCPF.setBounds(10, 81, 268, 59);
 		add(lblCPF);
 		
-		JLabel lblNumero = new JLabel("N\u00FAmero:");
+		lblNumero = new JLabel("Número: " + fachada.getUsuario().getNumero());
 		lblNumero.setForeground(Color.BLACK);
 		lblNumero.setFont(new Font("Candara Light", Font.PLAIN, 20));
 		lblNumero.setBounds(10, 166, 268, 59);
 		add(lblNumero);
 		
-		JLabel lblEmail = new JLabel("Email:");
+		lblEmail = new JLabel("Email:" + fachada.getUsuario().getEmail());
 		lblEmail.setForeground(Color.BLACK);
 		lblEmail.setFont(new Font("Candara Light", Font.PLAIN, 20));
 		lblEmail.setBounds(10, 283, 268, 59);
@@ -52,10 +54,6 @@ public class MeuPerfilView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				alterarInfo.setVisible(true);
 				alterarInfo.setBounds(150, 150, 500, 350);
-				lblNome.setText("Nome: ");//colocar os novos nomes
-				lblEmail.setText("Email: ");
-				lblNumero.setText("Numero: ");
-				lblCPF.setText("CPF: ");
 			}
 		});
 		btnAlterar.setFont(new Font("Candara Light", Font.PLAIN, 20));
@@ -64,4 +62,30 @@ public class MeuPerfilView extends JPanel {
 		add(btnAlterar);
 
 	}
+	public JLabel getLblCPF() {
+		return lblCPF;
+	}
+	public void setLblCPF(JLabel lblCPF) {
+		this.lblCPF = lblCPF;
+	}
+	public JLabel getLblNome() {
+		return lblNome;
+	}
+	public void setLblNome(JLabel lblNome) {
+		this.lblNome = lblNome;
+	}
+	public JLabel getLblNumero() {
+		return lblNumero;
+	}
+	public void setLblNumero(JLabel lblNumero) {
+		this.lblNumero = lblNumero;
+	}
+	public JLabel getLblEmail() {
+		return lblEmail;
+	}
+	public void setLblEmail(JLabel lblEmail) {
+		this.lblEmail = lblEmail;
+	}
+	
+	
 }
