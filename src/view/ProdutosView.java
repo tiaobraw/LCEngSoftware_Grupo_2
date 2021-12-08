@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import sistema.Produto;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,12 +13,24 @@ import sistema.Fachada;
 
 import java.awt.Color;
 import javax.swing.JTable;
+import javax.swing.JTabbedPane;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+
+import exceptions.ElementoNaoExisteException;
+
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ProdutosView extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
-
+	private DefaultListModel model = new DefaultListModel();
+	private JList listProduto = new JList(); 
 	/**
 	 * Launch the application.
 	 */
@@ -34,16 +47,57 @@ public class ProdutosView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		String[] colunas = {"Nome", "Id", "tag", "Descrição", "Observação", "Preço"};
 		
-		Object[][] dados = {
-				{"Produto1", "Id1", "tag1", "Descrição1", "Observação1", "Preço1"},
-				{"Produto2", "Id2", "tag2", "Descrição2", "Observação2", "Preço2"}
-		};
+		listProduto.setBounds(21, 11, 581, 372);
+		contentPane.add(listProduto);
 		
-		table = new JTable(dados, colunas);
-		table.setBounds(30, 44, 594, 287);
-		contentPane.add(table);
-		JScrollPane barraRolagem = new JScrollPane(table);
+		JButton btnNovoProduto = new JButton("Novo Produto");
+		btnNovoProduto.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				Produto produtoSelecionado = (Produto)listProduto.getSelectedValue();
+				
+			}
+		});
+		btnNovoProduto.setBounds(665, 125, 89, 23);
+		contentPane.add(btnNovoProduto);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+					Produto produtoSelecionado = (Produto)listProduto.getSelectedValue();
+					int index = listProduto.getSelectedIndex();
+					if(produtoSelecionado != null) {
+						try {
+							boolean sucesso = fachada.removerProduto(produtoSelecionado);
+							if(sucesso) {
+								model.removeElementAt(index);
+								fachada.removerItemPedido(produtoSelecionado);
+							}
+						} catch (ElementoNaoExisteException e1) {
+							JOptionPane.showMessageDialog(null, e1.getMessage());
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "Selecione um produto!");
+					}
+			}
+		});
+		btnExcluir.setBounds(665, 245, 89, 23);
+		contentPane.add(btnExcluir);
+		
+		JButton btnNewButton = new JButton("Atualizar");
+		btnNewButton.setBounds(652, 313, 89, 23);
+		contentPane.add(btnNewButton);
+		
+	
+	
+		
+}
+	
+	public void adicionar(Produto produto)
+	{
+		listProduto.setModel(model);
+		model.addElement(produto);
 	}
 }
