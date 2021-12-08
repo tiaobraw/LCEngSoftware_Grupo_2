@@ -22,7 +22,7 @@ public class Inicio {
 				try {
 					CadastroView cadastro = new CadastroView(fachada);
 					LoginView login = new LoginView(fachada);
-					if(existe) {
+					if(!existe) {
 						cadastro.setVisible(true);	
 						login.setVisible(false);	
 					}else

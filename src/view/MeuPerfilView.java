@@ -60,7 +60,8 @@ public class MeuPerfilView extends JPanel {
 		btnAlterar.setBackground(new Color(204, 255, 204));
 		btnAlterar.setBounds(62, 391, 223, 42);
 		add(btnAlterar);
-
+		
+		
 	}
 	public JLabel getLblCPF() {
 		return lblCPF;

@@ -20,6 +20,7 @@ public class LogadoView extends JFrame {
 	private JPanel contentPane;
 	private Fachada fachada = new Fachada();
 	private MeuPerfilView perfil = new MeuPerfilView(fachada);
+	private ProdutosView produtos = new ProdutosView(fachada);
 
 
 	/**
@@ -34,12 +35,16 @@ public class LogadoView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		perfil.setVisible(true);
+		perfil.setVisible(true);
+		produtos.setVisible(false);
 		
 		JPanel panelBase = new JPanel();
 		panelBase.setBackground(new Color(255, 255, 255));
 		panelBase.setBounds(0, 0, 1184, 561);
 		contentPane.add(panelBase);
 		panelBase.setLayout(null);
+		panelBase.add(perfil);
+		panelBase.add(produtos);
 		
 		JPanel panelInicio = new JPanel();
 		panelInicio.setBackground(new Color(245, 255, 250));
@@ -75,7 +80,6 @@ public class LogadoView extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//abrir parte do meu perfil
-				panelBase.add(perfil);
 				perfil.setBounds(267, 117, 917, 444);
 				perfil.setVisible(true);
 			}
@@ -92,6 +96,13 @@ public class LogadoView extends JFrame {
 		panelMeuPerfil.add(lblMeuPerfil);
 		
 		JPanel panelProdutos = new JPanel();
+		panelProdutos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				perfil.setVisible(false);
+				produtos.setVisible(true);
+			}
+		});
 		panelProdutos.setBounds(0, 112, 268, 59);
 		panelProdutos.setBackground(new Color(0, 0, 0));
 		panelBarraLateral.add(panelProdutos);
@@ -152,6 +163,7 @@ public class LogadoView extends JFrame {
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setBounds(0, 42, 1184, 5);
 		panelBottom.add(panel);
+		
 	}
 
 }

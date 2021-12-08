@@ -10,14 +10,14 @@ public class Produto {
 	private Pedido pedido;
 	private int quantidade; //é nula se pedido for null
 	
-	public Produto (int id, String tag, String descricao, String observacao, double preco, String nome, Pedido pedido) {
+	public Produto (int id, String tag, String descricao, String observacao, double preco, String nome) {
 		this.IdProduto = id;
 		this.Tag = tag;
 		this.Descricao = descricao;
 		this.Observacao = observacao;
 		this.preco = preco;
 		this.nome = nome;
-		this.pedido = pedido;
+		this.pedido = null;
 		this.quantidade = 0;
 	}
 	public Produto (int id, String tag, String descricao, String observacao, double preco, String nome, Pedido pedido, int quantidade) {
