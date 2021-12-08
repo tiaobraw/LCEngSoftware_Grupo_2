@@ -88,8 +88,9 @@ public class UsuarioController {
 	}
 	
 	public Usuario getUsuario() {
-		Usuario usuario = new Usuario(); //como só há um usuario, nao precisa passar parametro, ja pega direto do banco de dados
-		return this.repositorioUsuario.getObj(usuario);
+		Usuario usuario = new Usuario("Nome aleatorio", "Senha aleatoria", "samknjdv", 283,8734783); //como só há um usuario, nao precisa passar parametro, ja pega direto do banco de dados
+		return usuario;
+		//return this.repositorioUsuario.getObj(usuario);
 	}
 	
 	public boolean login(long CPF, String senha) throws ElementoNaoExisteException, SenhaIncorretaException {

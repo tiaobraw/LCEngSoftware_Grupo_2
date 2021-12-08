@@ -59,6 +59,8 @@ public class AlterarInfoUsuario extends JDialog {
 		contentPanel.add(textNome);
 		textNome.setColumns(10);
 		textNome.setText(fachada.getUsuario().getNome());
+		
+		textNome.setText("Nome: ");
 		{
 			textCPF = new JFormattedTextField();
 			textCPF.setColumns(10);

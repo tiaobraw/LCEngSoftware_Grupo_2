@@ -1,13 +1,14 @@
 package sistema;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
 public class Pedido {
 	private int IdPedido;
-	private Calendar data;
-	private String versao;
+	private LocalDateTime data;
+	private double versao;
 	private Status status;
 	private double comissao;
 	private double valorTotal;
@@ -19,7 +20,7 @@ public class Pedido {
 		
 	}
 	
-	public Pedido(int id, Calendar data, String versao, Status Status, double comissao, String descricao, Cliente cliente) {
+	public Pedido(int id, LocalDateTime data, double versao, Status Status, double comissao, String descricao, Cliente cliente) {
 		this.IdPedido = id;
 		this.data = data;
 		this.versao = versao;
@@ -27,9 +28,6 @@ public class Pedido {
 		this.comissao = comissao;
 		this.descricao = descricao;
 		double valor = 0;
-		for (int i = 0; i < Itens.size(); i++) {
-			valor = valor + Itens.get(i).getPreco();
-		}
 		this.valorTotal = valor * this.comissao;
 	}
 	
@@ -64,19 +62,19 @@ public class Pedido {
 		IdPedido = idPedido;
 	}
 
-	public Calendar getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
 
-	public String getVersao() {
+	public double getVersao() {
 		return versao;
 	}
 
-	public void setVersao(String versao) {
+	public void setVersao(double versao) {
 		this.versao = versao;
 	}
 

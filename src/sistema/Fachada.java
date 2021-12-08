@@ -34,7 +34,7 @@ public class Fachada {
 	}
 	
 	public Usuario getUsuario() {
-		return this.getUsuario();
+		return this.usuario.getUsuario();
 	}
 	
 	public boolean atualizarUsuario(String nome, String email, long CPF, long numero, String senhaNova, String confirmaSenhaNova, String senhaInformada) throws StringVaziaException, ElementoNaoExisteException, SenhasNaoConferemException, SenhaIncorretaException, SenhaPequenaException {
