@@ -14,7 +14,7 @@ public class Pedido {
 	private double valorTotal;
 	private String descricao;
 	private Cliente cliente;
-	private ArrayList <Produto> Itens = new ArrayList<Produto>();
+	
 	
 	public Pedido() {
 		
@@ -29,29 +29,6 @@ public class Pedido {
 		this.descricao = descricao;
 		double valor = 0;
 		this.valorTotal = valor * this.comissao;
-	}
-	
-	public boolean addItem(Produto p) {
-		for(int i = 0; i < Itens.size(); i++) {
-			if(Itens.get(i).equals(p)) {
-				return false;
-			} else {
-				Itens.add(p);
-				this.valorTotal = calcularTotal();
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public double calcularTotal() {
-		double valor = 0;
-		double vTotal = 0;
-		for (int i = 0; i < Itens.size(); i++) {
-			valor = valor + Itens.get(i).getPreco();
-		}
-		vTotal = valor * this.comissao;
-		return vTotal;
 	}
 
 	public int getIdPedido() {
@@ -102,13 +79,6 @@ public class Pedido {
 		this.valorTotal = valorTotal;
 	}
 
-	public ArrayList<Produto> getItens() {
-		return Itens;
-	}
-
-	public void setItens(ArrayList<Produto> itens) {
-		Itens = itens;
-	}
 
 	public String getDescricao() {
 		return descricao;
