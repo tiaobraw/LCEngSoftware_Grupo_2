@@ -34,8 +34,6 @@ public class LogadoView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		perfil.setVisible(true);
-		perfil.setVisible(true);
 		produtos.setVisible(false);
 		
 		JPanel panelBase = new JPanel();
@@ -43,8 +41,11 @@ public class LogadoView extends JFrame {
 		panelBase.setBounds(0, 0, 1184, 561);
 		contentPane.add(panelBase);
 		panelBase.setLayout(null);
-		panelBase.add(perfil);
 		panelBase.add(produtos);
+		perfil.setBounds(0, 0, 452, 444);
+		produtos.add(perfil);
+		perfil.setVisible(true);
+		perfil.setVisible(true);
 		
 		JPanel panelInicio = new JPanel();
 		panelInicio.setBackground(new Color(245, 255, 250));
@@ -116,6 +117,12 @@ public class LogadoView extends JFrame {
 		panelProdutos.add(lblProdutos);
 		
 		JPanel panelClientes = new JPanel();
+		panelClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		panelClientes.setBounds(0, 198, 268, 59);
 		panelClientes.setBackground(new Color(0, 0, 0));
 		panelBarraLateral.add(panelClientes);

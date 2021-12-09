@@ -7,20 +7,16 @@ public class Cliente {
 	private String endereco;
 	private int telefone;
 	private String email;
-	private String Descricao;
-	private String Observacao;
 	private String responsavel;
 	private String emailResponsavel;
 	private long CPF;
 	
-	public Cliente (String nome, long CPF, String endereco, int telefone, String email, String descricao, String observacao) {
+	public Cliente (String nome, long CPF, String endereco, int telefone, String email) {
 		this.Nome = nome;
 		this.CPF = CPF;   
 		this.endereco = endereco;
 		this.telefone = telefone;
 		this.email = email;
-		this.Descricao = descricao;
-		this.Observacao = observacao;
 	}
 	
 	public Cliente () {
@@ -57,22 +53,6 @@ public class Cliente {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getDescricao() {
-		return Descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		Descricao = descricao;
-	}
-
-	public String getObservacao() {
-		return Observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		Observacao = observacao;
 	}
 
 	public long getCPF() {

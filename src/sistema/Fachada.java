@@ -17,6 +17,7 @@ public class Fachada {
 	private UsuarioController usuario;
 	private ProdutosController produtos;
 	private ItemPedidoController itens_pedido;
+	private ClientesController clientes;
 	
 	public Fachada()
 	{
@@ -24,6 +25,7 @@ public class Fachada {
 		usuario = new UsuarioController();
 		produtos = new ProdutosController();
 		itens_pedido = new ItemPedidoController();
+		clientes = new ClientesController();
 	}
 	
 	public static Fachada getInstance() {
@@ -94,6 +96,18 @@ public class Fachada {
 	
 	public Produto getItemPedido(Produto produto) { //pega um produto 
 		return this.itens_pedido.getProduto(produto);
+	}
+	
+	public boolean removerCliente(Cliente cliente) throws ElementoNaoExisteException {
+		return this.clientes.removerCliente(cliente);
+	}
+	
+	public boolean adicionarCliente(Cliente cliente) throws ElementoJaExisteException {
+		return this.clientes.inserirCliente(cliente);
+	}
+	
+	public boolean atualizarCliente(Cliente cliente) {
+		return this.clientes.atualizarCliente(cliente);
 	}
 
 }

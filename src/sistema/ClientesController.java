@@ -14,11 +14,9 @@ public class ClientesController {
 		this.repositorioClientes = new RepositorioGenerico<Cliente>();
 	}
 
-	public boolean inserirCliente(String nome, long CPF, String endereco, int telefone, String email, String descricao, String observacao) throws ElementoJaExisteException {
-		Cliente cliente = new Cliente(nome, CPF, endereco, telefone, email, descricao, observacao);
-		Cliente temporario = cliente;
-		temporario = this.repositorioClientes.getObj(temporario);
-		if(temporario == null) return this.repositorioClientes.inserir(cliente);
+	public boolean inserirCliente(Cliente cliente) throws ElementoJaExisteException {
+		
+		if(cliente != null) return this.repositorioClientes.inserir(cliente);
 		else throw new ElementoJaExisteException(cliente);
 	}
 
